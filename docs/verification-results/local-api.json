@@ -1,7 +1,7 @@
 {
   "base": "http://127.0.0.1:3000",
-  "checkedAt": "2026-10-13T15:43:53.494Z",
-  "purchaseId": "adf2b8734f435d2a2b9489cf07b50afb",
+  "checkedAt": "2026-10-13T15:51:09.141Z",
+  "purchaseId": "9068c198f50f771fce7d880536154544",
   "results": [
     "GET offers: 200, two plans",
     "POST purchase: persisted success, concurrent retry produces one id, offer conflict: 409",

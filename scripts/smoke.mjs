@@ -57,6 +57,8 @@ if (process.env.NUXT_APPWRITE_API_KEY) {
     .setKey(process.env.NUXT_APPWRITE_API_KEY);
   const tables = new TablesDB(client);
   const rows = await tables.listRows({
+    total: true,
+    ttl: 0,
     databaseId: process.env.NUXT_APPWRITE_DATABASE_ID || "amaya",
     tableId: process.env.NUXT_APPWRITE_TABLE_ID || "purchases",
     queries: [Query.equal("$id", [a.data.id])],

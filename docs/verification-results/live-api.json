@@ -1,0 +1,11 @@
+{
+  "base": "https://amaya-service.vercel.app",
+  "checkedAt": "2026-10-13T15:51:12.035Z",
+  "purchaseId": "bef594f89bd2d2cbf071280a440af223",
+  "results": [
+    "GET offers: 200, two plans",
+    "POST purchase: persisted success, concurrent retry produces one id, offer conflict: 409",
+    "POST restore: own purchase restored; new device has no access",
+    "Direct Appwrite query: exactly one row with expected requestId and no public permissions"
+  ]
+}

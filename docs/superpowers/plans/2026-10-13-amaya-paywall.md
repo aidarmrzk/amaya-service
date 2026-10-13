@@ -51,10 +51,15 @@
 - [ ] Написать тест каталога; production-ошибка, которую он ловит: неверная сумма, валюта или рекомендованный тариф.
 
 ```ts
-expect(getOffers().map(o => [o.id, o.amount, o.currency])).toEqual([
-  ['monthly', 29900, 'RUB'], ['yearly', 199000, 'RUB']
-])
-expect(getOffers().filter(o => o.recommended).map(o => o.id)).toEqual(['yearly'])
+expect(getOffers().map((o) => [o.id, o.amount, o.currency])).toEqual([
+  ["monthly", 29900, "RUB"],
+  ["yearly", 199000, "RUB"],
+]);
+expect(
+  getOffers()
+    .filter((o) => o.recommended)
+    .map((o) => o.id),
+).toEqual(["yearly"]);
 ```
 
 - [ ] Запустить npm test -- tests/unit/offers.test.ts; увидеть отказ из-за отсутствующего каталога, затем реализовать getOffers() и HTTP-адаптер.
@@ -69,13 +74,26 @@ createPurchase(body: unknown, deviceId: string, repository: PurchaseRepository):
 - [ ] Написать тесты createPurchase и restorePurchase с тестовым in-memory репозиторием; сбои вставки моделировать на границе хранилища. Идентификаторы тестовых устройств и requestId — валидные UUID.
 
 ```ts
-expect(await createPurchase(body, deviceA, repo)).toMatchObject({ offerId: 'yearly' })
-expect(await createPurchase(body, deviceA, repo)).toEqual(await createPurchase(body, deviceA, repo))
-expect(repo.rows).toHaveLength(1)
-await expect(createPurchase({ ...body, offerId: 'unknown' }, deviceA, repo)).rejects.toMatchObject({ statusCode: 400 })
-await expect(createPurchase({ ...body, requestId: 'broken' }, deviceA, repo)).rejects.toMatchObject({ statusCode: 400 })
-await expect(createPurchase({ ...body, offerId: 'monthly' }, deviceA, repo)).rejects.toMatchObject({ statusCode: 409 })
-expect(await restorePurchase(deviceB, repo)).toEqual({ purchased: false, purchase: null })
+expect(await createPurchase(body, deviceA, repo)).toMatchObject({
+  offerId: "yearly",
+});
+expect(await createPurchase(body, deviceA, repo)).toEqual(
+  await createPurchase(body, deviceA, repo),
+);
+expect(repo.rows).toHaveLength(1);
+await expect(
+  createPurchase({ ...body, offerId: "unknown" }, deviceA, repo),
+).rejects.toMatchObject({ statusCode: 400 });
+await expect(
+  createPurchase({ ...body, requestId: "broken" }, deviceA, repo),
+).rejects.toMatchObject({ statusCode: 400 });
+await expect(
+  createPurchase({ ...body, offerId: "monthly" }, deviceA, repo),
+).rejects.toMatchObject({ statusCode: 409 });
+expect(await restorePurchase(deviceB, repo)).toEqual({
+  purchased: false,
+  purchase: null,
+});
 ```
 
 - [ ] Дополнить тестом отказа БД: createPurchase отклоняется с 503, успех не возвращается. Запустить npm test -- tests/unit/purchases.test.ts; убедиться, что недостающая реализация вызывает отказ.
@@ -117,3 +135,5 @@ expect(await restorePurchase(deviceB, repo)).toEqual({ purchased: false, purchas
 - Предложенный способ исполнения: Native, последовательно в текущем чате; независимая итоговая проверка через доступный инструмент code review.
 
 Уточнение пользователя: 2026-10-13 Appwrite выбран вместо Supabase. Проверка адаптера SDK добавлена в tests/unit/appwrite.test.ts. Ключ только rows.read/rows.write; схема настроена через штатную консоль.
+
+Итог: реализация и публикация завершены. Результаты и отклонения от шагов (консольная настройка БД, ручная клавиатурная проверка, метрики Figma) описаны в ../../verification.md.

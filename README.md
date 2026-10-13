@@ -2,6 +2,8 @@
 
 Nuxt 4 + TypeScript, server routes и Appwrite Cloud TablesDB. Покупка демонстрационная, без денег и платёжного SDK.
 
+**Сервис:** https://amaya-service.vercel.app
+**Репозиторий:** https://github.com/aidarmrzk/amaya-service
 **Макет:** https://www.figma.com/design/ilLSwv47wIKiWUmDkYGRBx?node-id=2-2
 
 ## Локальный запуск
