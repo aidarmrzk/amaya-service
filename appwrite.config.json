@@ -1,0 +1,26 @@
+{
+  "projectId": "6ace4d27001671c66a18",
+  "endpoint": "https://fra.cloud.appwrite.io/v1",
+  "databaseId": "amaya",
+  "tableId": "purchases",
+  "columns": [
+    {
+      "key": "offerId",
+      "type": "enum",
+      "elements": ["monthly", "yearly"],
+      "required": true
+    },
+    { "key": "deviceId", "type": "varchar", "size": 36, "required": true },
+    { "key": "requestId", "type": "varchar", "size": 36, "required": true }
+  ],
+  "indexes": [
+    {
+      "key": "device_created",
+      "type": "key",
+      "columns": ["deviceId", "$createdAt"],
+      "orders": ["ASC", "DESC"]
+    }
+  ],
+  "permissions": [],
+  "rowSecurity": true
+}
