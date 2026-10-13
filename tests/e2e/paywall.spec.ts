@@ -119,3 +119,13 @@ test("real server validates input and repairs invalid device cookies", async ({
   expect(response.headers()["set-cookie"]).toContain("HttpOnly");
   expect(response.headers()["set-cookie"]).toContain("SameSite=Lax");
 });
+
+test("first visit establishes device identity before a purchase response can be lost", async ({
+  request,
+}) => {
+  const offers = await request.get("/api/offers");
+  expect(offers.status()).toBe(200);
+  expect(offers.headers()["set-cookie"]).toMatch(/amaya_device=[0-9a-f-]{36}/);
+  expect(offers.headers()["set-cookie"]).toContain("HttpOnly");
+  expect(offers.headers()["cache-control"]).toBe("no-store");
+});

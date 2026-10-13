@@ -17,7 +17,7 @@ const invalid = await fetch(new URL("/api/purchase", base), {
   body: JSON.stringify({ offerId: "unknown", requestId: "bad" }),
 });
 assert.equal(invalid.status, 400);
-const cookie = invalid.headers.get("set-cookie")?.split(";")[0];
+const cookie = offers.headers.get("set-cookie")?.split(";")[0];
 assert.ok(cookie?.startsWith("amaya_device="));
 const body = { offerId: "yearly", requestId: randomUUID() };
 const buy = async (value) => {

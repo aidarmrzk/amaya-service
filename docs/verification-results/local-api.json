@@ -1,0 +1,11 @@
+{
+  "base": "http://127.0.0.1:3000",
+  "checkedAt": "2026-10-13T15:43:53.494Z",
+  "purchaseId": "adf2b8734f435d2a2b9489cf07b50afb",
+  "results": [
+    "GET offers: 200, two plans",
+    "POST purchase: persisted success, concurrent retry produces one id, offer conflict: 409",
+    "POST restore: own purchase restored; new device has no access",
+    "Direct Appwrite query: exactly one row with expected requestId and no public permissions"
+  ]
+}
